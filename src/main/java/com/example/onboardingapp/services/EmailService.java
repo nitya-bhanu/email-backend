@@ -53,14 +53,19 @@ public class EmailService{
         return "Email Sent successfully";
     }
 
-    public void sendRejectionMessage(String to, String subject, String text){
+    public void sendRejectionMessage (String to, String subject, String text){
+        try{
+            SimpleMailMessage message=new SimpleMailMessage();
+            message.setFrom("super-market-admin.com");
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(text);
+            javaMailSender.send(message);
+        }
+        catch(Exception e){
+            System.out.println(e.getStackTrace());
+        }
 
-        SimpleMailMessage message=new SimpleMailMessage();
-        message.setFrom("super-market-admin.com");
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(text);
-        javaMailSender.send(message);
     }
 
 }
