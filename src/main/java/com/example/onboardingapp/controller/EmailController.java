@@ -25,4 +25,9 @@ public class EmailController {
     public String sendAnnouncements(@RequestBody EmailAll emailAll){
         return emailService.sendAnnouncements(emailAll.toEmailAddress,emailAll.subjectEmail,emailAll.text);
     }
+
+    @PostMapping(value = "/otp")
+    public String sendOtp(@RequestBody String emailId){
+        return emailService.sendOtp(emailId);
+    }
 }

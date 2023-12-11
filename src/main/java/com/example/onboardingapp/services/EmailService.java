@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -66,6 +67,18 @@ public class EmailService{
             System.out.println(e.getStackTrace());
         }
 
+    }
+
+    public String sendOtp(String to){
+        Random rand = new Random();
+        int rand_int1 = rand.nextInt(100000);
+        SimpleMailMessage message=new SimpleMailMessage();
+        message.setFrom("super-market-admin.com");
+        message.setTo(to);
+        message.setSubject("Your One time password");
+        message.setText(Integer.toString(rand_int1));
+        javaMailSender.send(message);
+        return Integer.toString(rand_int1);
     }
 
 }
